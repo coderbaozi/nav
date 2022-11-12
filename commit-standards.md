@@ -27,3 +27,13 @@
 :twisted_rightwards_arrows:  twisted_rightwards_arrows 合并分支
 
 :wrench:  wrench 改变配置文件
+
+:heavy_plus_sign: heavy_plus_sign 添加依赖项
+
+:see_no_evil: see_no_evil 添加或者更新.gitignore文件
+
+:dizzy: dizzy 添加或更新动画和过度
+
+:iphone: iphone 致力于响应式设计
+
+:necktie: necktie 添加或者更新业务逻辑
