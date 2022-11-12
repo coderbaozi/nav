@@ -37,3 +37,5 @@
 :iphone: iphone 致力于响应式设计
 
 :necktie: necktie 添加或者更新业务逻辑
+
+:white_check_mark: white_check_mark 添加、更新或通过测试
