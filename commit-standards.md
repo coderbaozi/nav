@@ -4,7 +4,7 @@
 
 :art:  art  结构缩进/格式化代码
 
- :zap: zap 性能改善
+:zap: zap 性能改善
 
 :fire:  fire 删除代码或者文件
 
@@ -39,3 +39,5 @@
 :necktie: necktie 添加或者更新业务逻辑
 
 :white_check_mark: white_check_mark 添加、更新或通过测试
+
+:memo: memo 添加或更新文档
