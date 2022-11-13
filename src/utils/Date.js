@@ -5,8 +5,9 @@
  * @createTime: 2022-11-12 16:41:31
  */
 import DateConvert from './DateConvert.js';
-const date = new Date();
-const dateUtil={
+import beanFactory from '../beanFactory/beanFactory.js'
+const date = beanFactory.getDateBean();
+const dateUtil = {
 	/**
 	 * description: 返回当前年份
 	 * author: baozi
@@ -57,7 +58,7 @@ const dateUtil={
 	},
 	/**
 	* @returns 小时、分钟{11,20}
-	* 修复补0
+	* 修复补 0
 	*/
 	getCurrentTime: ()=>{
 		let currentTime = {
@@ -73,4 +74,5 @@ const dateUtil={
 		return currentTime;
 	}
 }
+
 export default dateUtil;
