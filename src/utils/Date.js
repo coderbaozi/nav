@@ -29,10 +29,10 @@ const dateUtil={
 		return date.getDate();
 	},
 	/*
-	* description: 返回当前 星期0-6
+	* description: 星期日为 0，星期一为 1，依此类推。
 	*/
     getCurrentWeek: ()=>{
-		let weekNumber = date.getDay()-1;
+		let weekNumber = date.getDay();
 		return DateConvert.convertWeek(weekNumber);
 	},
 	/**

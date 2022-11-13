@@ -4,7 +4,7 @@
  * @createTime: 2022-11-12 17:00:34
  */
 import {calendar} from 'js-calendar-converter';
-const WEEK = ['星期一','星期二','星期三','星期四','星期五','星期六','星期天','不合法！'];
+const WEEK = ['星期天','星期一','星期二','星期三','星期四','星期五','星期六'];
 
 const DateConvert = {
 	/**
