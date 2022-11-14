@@ -1,0 +1,23 @@
+{
+  "id": "3765496",
+  "name": "navigation",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "8554857",
+      "name": "baidu-fill",
+      "font_class": "baidu-fill",
+      "unicode": "e6bc",
+      "unicode_decimal": 59068
+    },
+    {
+      "icon_id": "10031179",
+      "name": "谷歌",
+      "font_class": "guge",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    }
+  ]
+}
