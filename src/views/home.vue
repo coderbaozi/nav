@@ -1,7 +1,7 @@
 <template>
 	<div class="home-panel">
 		<div class="clock-panel">
-			<Time></Time>
+			<Time :fontColor="fontColor"></Time>
 		</div>
 		
 		<div class="search-panel">
@@ -11,8 +11,10 @@
 </template>
 
 <script setup>
-	import {getCurrentInstance} from 'vue'
-	const {proxy} = getCurrentInstance(); 
+	import {ref,getCurrentInstance} from 'vue'
+	const {proxy} = getCurrentInstance();
+	let fontColor = ref('black');
+	
 	const test = () => {
 		let res = proxy.Request({
 			url:'/api/captchaImage'
