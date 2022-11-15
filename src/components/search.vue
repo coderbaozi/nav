@@ -8,17 +8,17 @@
 		</div>
 
 		<div class="cm-input-main">
-			<input ref="autoFocus" id="input-text" class="cm-input-instance" placeholder="相信美好的事情将会发生" />
+			<input autofocus class="cm-input-instance" placeholder="相信美好的事情将会发生" />
 		</div>
 
 	</div>
 
 </template>
 
-
 <script setup>
 	import {
-		ref
+		ref,
+		nextTick
 	} from 'vue';
 	let iconfont = ref('iconfont');
 	const ICON_NAME = {
