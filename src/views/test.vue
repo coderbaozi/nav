@@ -1,6 +1,6 @@
 <template>
 	<div class="test-panel">
-		<Time></Time>
+		<search></search>
 	</div>
 </template>
 

@@ -1,5 +1,6 @@
 <template>
 	<div class="home-panel">
+		
 		<div class="clock-panel">
 			<Time :fontColor="fontColor"></Time>
 		</div>
@@ -13,7 +14,7 @@
 <script setup>
 	import {ref,getCurrentInstance} from 'vue'
 	const {proxy} = getCurrentInstance();
-	let fontColor = ref('black');
+	let fontColor = ref('white');
 	
 	const test = () => {
 		let res = proxy.Request({
@@ -32,14 +33,14 @@
 		background-position: center;
 		background-image: url('../assets/background.jpg');
 		.search-panel{
-			left: 200px;
-			top: calc(15vh);
-			width: calc(50vw);
 			position: absolute;
+			left: 540px;
+			top: 350px;
+			width: calc(30vw);
 		}
 		.clock-panel{
 			top: 80px;
-			left: 625px;
+			left: 635px;
 			position: absolute;
 		}
 	}
