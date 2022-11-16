@@ -36,7 +36,7 @@
 			position: absolute;
 			left: 540px;
 			top: 350px;
-			width: calc(30vw);
+			width: calc(34.15vw);
 		}
 		.clock-panel{
 			top: 80px;
