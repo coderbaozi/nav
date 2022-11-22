@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3876349",
+      "name": "bing",
+      "font_class": "bing",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "10614373",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
       "icon_id": "8554857",
       "name": "baidu-fill",
       "font_class": "baidu-fill",
