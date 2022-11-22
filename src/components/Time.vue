@@ -1,11 +1,11 @@
 <template>
 	<div :class="fontColor">
-		<div class="time-penal" :fontColor="fontColor">
-			<div class="time-date">
+		<div class="cm-time-penal" :fontColor="fontColor">
+			<div class="cm-time-date">
 				{{solarDate.month}}月{{solarDate.day}}日{{week}} .
 				{{lunarDate.lunarYear}}{{lunarDate.standardMonth}}{{lunarDate.standardDay}}
 			</div>
-			<div class="clock">
+			<div class="cm-clock">
 				{{currentTime.hours}} : {{currentTime.minutes}}
 			</div>
 		</div>
@@ -46,29 +46,29 @@
 	// 黑白两色
 	.white{
 		color: #fff;
-		.clock{
+		.cm-clock{
 			border: solid #DCDCDC 4px;
 		}
 	}
 	
 	.black{
 		color: #000;
-		.clock{
+		.cm-clock{
 			border: solid #000 4px;
 		}
 	}
 	
-	.time-penal {
+	.cm-time-penal {
 		width: 320px;
 		padding: 20px;
 		background-color: rgba(255, 255, 255, 0);
-		.time-date {
+		.cm-time-date {
 			font-size: 20px;
 			font-weight: bold;
 			text-align: center;
 			margin-bottom: 20px;
 		}
-		.clock {
+		.cm-clock {
 			font-size: 80px;
 			text-align: center;
 			border-radius: 10px;
