@@ -7,6 +7,7 @@ import '@/assets/icon/iconfont.css'
 import Request from '@/utils/Request';
 import search from '@/components/search.vue'
 import Time from '@/components/Time.vue'
+import List from '@/components/List.vue'
 // 引入组件库全局样式资源
 import 'tdesign-vue-next/es/style/index.css';
 const app = createApp(App);
@@ -14,6 +15,7 @@ app.use(router);
 app.use(TDesign);
 app.component('Time',Time);
 app.component('search',search);
+app.component('List',List);
 app.config.globalProperties.Request=Request;
 app.mount('#app');
 
