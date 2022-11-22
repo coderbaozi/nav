@@ -1,26 +1,32 @@
 <template>
 	<div class="home-panel">
-		
+
 		<div class="clock-panel">
 			<Time :fontColor="fontColor"></Time>
 		</div>
-		
+
 		<div class="search-panel">
-			<search class="search"></search>
+			<search class="search-main" @getInputValue="getInputValue"></search>
 		</div>
 	</div>
 </template>
 
+
 <script setup>
-	import {ref,getCurrentInstance} from 'vue'
-	const {proxy} = getCurrentInstance();
+	import { ref ,getCurrentInstance } from 'vue'
+	import {GOOGLE_ASSOCAITION_URL,BING_ASSOCAITION_URL,BAIDU_ASSOCAITION_URL} from '@/constant/sugConstant.js'
+	const { proxy } = getCurrentInstance();
 	let fontColor = ref('white');
 	
-	const test = () => {
-		let res = proxy.Request({
-			url:'/api/captchaImage'
-		});
-		console.log(res);
+	const getInputValue = (value) => {
+		const config = {
+			sugUrl: BAIDU_ASSOCAITION_URL,
+			sugContent: value
+		}
+		if(value){
+			window.getAssociation(config);
+		}
+		
 	}
 </script>
 
@@ -32,13 +38,14 @@
 		background-size: cover;
 		background-position: center;
 		background-image: url('../assets/background.jpg');
-		.search-panel{
+		.search-panel {
 			position: absolute;
 			left: 540px;
 			top: 350px;
 			width: calc(34.15vw);
 		}
-		.clock-panel{
+
+		.clock-panel {
 			top: 80px;
 			left: 635px;
 			position: absolute;
