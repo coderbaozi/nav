@@ -12,7 +12,7 @@
 				:class="['cm-input-instance',textPosition]" placeholder="相信美好的事情将会发生" />
 		</div>
 
-		<div v-if="inputValue" class="association-list">
+		<div v-if="inputValue" @keydown.up="optionUp" @keydown.down="optionDown" class="association-list">
 			<List :content='associationContent'></List>
 		</div>
 	</div>
@@ -26,7 +26,7 @@
 			sugUrl,
 			sugContent
 		} = config;
-		
+
 		sugUrl = sugUrl.replace("#content#", sugContent);
 		//动态添加JS脚本
 		let script = document.createElement("script");
@@ -39,6 +39,11 @@
 	import {
 		ref
 	} from 'vue';
+	import {
+		GOOGLE_ASSOCAITION_URL,
+		BING_ASSOCAITION_URL,
+		BAIDU_ASSOCAITION_URL
+	} from '@/constant/sugConstant.js'
 
 	// 给父组件传递inputValue和搜索引擎名称 来生成联想词
 	let inputValue = ref();
@@ -46,7 +51,7 @@
 
 	let iconfont = ref('iconfont');
 	let associationContent = ref();
-	
+
 	/**
 	 * description: 百度联想回调函数
 	 * author: baozi
@@ -57,7 +62,7 @@
 			associationContent.value = res.s;
 		}
 	};
-	
+
 	/**
 	 * description: 谷歌联想回调函数
 	 * author: baozi
@@ -65,10 +70,21 @@
 	 */
 	window.google = {
 		sug: (res) => {
-			console.log(res);
+			let resArray = [];
+			let handledArray = [];
+			for(let index in res[1]){
+				resArray.push(res[1][index][0]);
+			}
+			// 处理返回的个数
+			if(resArray.length>8){
+				for(let index =0;index<8;index++){
+					handledArray.push(resArray[index]);
+				}
+			}
+			associationContent.value = handledArray;
 		}
 	};
-	
+
 	/**
 	 * description: 必应联想回调函数
 	 * author: baozi
@@ -76,7 +92,14 @@
 	 */
 	window.bing = {
 		sug: (res) => {
-			console.log(res);
+			let resArray = [];
+			let unhandleArray = res.AS.Results;
+			for(let index in unhandleArray){
+				for(let tindex in unhandleArray[index].Suggests){
+					resArray.push(unhandleArray[index].Suggests[tindex].Txt);
+				}
+			}
+			associationContent.value = resArray;
 		}
 	};
 
@@ -85,11 +108,11 @@
 		baidu: 'icon-baidu-fill',
 		bing: 'icon-bing',
 	}
-	
+
 	let currentIcon = ref(ICON_NAME.google);
 	let textPosition = ref('center');
 	let isInput = false;
-	
+
 	/**
 	 * description: 按下TAB键盘 切换图标同时切换搜索引擎
 	 * author: baozi 
@@ -99,13 +122,18 @@
 	const pressTab = () => {
 		if (currentIcon.value == ICON_NAME.google) {
 			currentIcon.value = ICON_NAME.baidu;
+			//将当前搜索引擎抛出
+			emit('currentSearchEngine', BAIDU_ASSOCAITION_URL);
 		} else if (currentIcon.value == ICON_NAME.baidu) {
 			currentIcon.value = ICON_NAME.bing;
+			emit('currentSearchEngine', BING_ASSOCAITION_URL);
 		} else {
 			currentIcon.value = ICON_NAME.google;
+			emit('currentSearchEngine', GOOGLE_ASSOCAITION_URL);
 		}
+
 	};
-	
+
 	/**
 	 * description: 阻止alt+tab引发的bug
 	 * author: baozi
@@ -114,7 +142,7 @@
 	const prevent = () => {
 
 	};
-	
+
 	/**
 	 * description: 原生js 阻止浏览器默认按下tab切换
 	 * author: baozi
@@ -126,7 +154,7 @@
 			event.preventDefault();
 		}
 	};
-	
+
 	/**
 	 * description: 检查是否input框中是否有输入
 	 * author: baozi
@@ -139,16 +167,25 @@
 		// 将数据传给父组件 ，
 		emit('getInputValue', inputValue.value);
 	};
-	
+
 	/**
 	 * description: 失去焦点改变位置
 	 * author: baozi
 	 */
 	const changePosition = () => {
-		if (!isInput) {
+		if (!inputValue.value) {
 			textPosition.value = 'center';
 		}
 	};
+
+	/**
+	 * description: 按下上箭头时间，选择联想词输入框
+	 * author: baozi
+	 * @createTime: 2022-11-23 10:47:44
+	 */
+	const optionUp = () => {
+		console.log('up!');
+	}
 </script>
 
 <style lang="less">
