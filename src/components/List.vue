@@ -2,7 +2,7 @@
 	<div>
 		<t-space direction="vertical">
 			<t-list>
-				<t-list-item v-for="item in content">
+				<t-list-item v-for="(item,index) in content">
 					<div class="cm-list-icon">
 						<svg t="1668862845981" class="search-icon" viewBox="0 0 1024 1024" version="1.1"
 							xmlns="http://www.w3.org/2000/svg" p-id="2224" width="18" height="18">
@@ -14,7 +14,7 @@
 								fill="#5ED7BC" p-id="2226"></path>
 						</svg>
 					</div>
-					<div class="cm-association-content">
+					<div @click="toSearch(item)" class="cm-association-content">
 						{{item}}
 					</div>
 				</t-list-item>
@@ -27,11 +27,28 @@
 	const props = defineProps({
 		content: {
 			type: Array,
+		},
+		selected:{
+			
+		},
+		size:{
+			type: Number,
+			default: 8
 		}
 	});
+	const emit = defineEmits();
+	//鼠标点击选择联想词 将联想词抛给search组件 并且跳转
+	const toSearch = (item) => {
+		
+	}
 </script>
 
 <style>
+	
+	/* 文本框选状态 */
+	.selected{
+		background-color: #000;
+	}
 	/* 文字居中覆盖原生样式 */
 	.t-list-item-main {
 		justify-content: flex-start;
