@@ -6,27 +6,39 @@
 		</div>
 
 		<div class="search-panel">
-			<search class="search-main" @getInputValue="getInputValue"></search>
+			<search @currentSearchEngine="getCurrentEngine" class="search-main" @getInputValue="getInputValue"></search>
 		</div>
 	</div>
 </template>
 
 
 <script setup>
-	import { ref ,getCurrentInstance } from 'vue'
-	import {GOOGLE_ASSOCAITION_URL,BING_ASSOCAITION_URL,BAIDU_ASSOCAITION_URL} from '@/constant/sugConstant.js'
-	const { proxy } = getCurrentInstance();
+	import {
+		ref,
+		getCurrentInstance
+	} from 'vue'
+	import {
+		GOOGLE_ASSOCAITION_URL,
+		BING_ASSOCAITION_URL,
+		BAIDU_ASSOCAITION_URL
+	} from '@/constant/sugConstant.js'
+	const {
+		proxy
+	} = getCurrentInstance();
 	let fontColor = ref('white');
-	
+	let currentSearchEngine = GOOGLE_ASSOCAITION_URL;
 	const getInputValue = (value) => {
 		const config = {
-			sugUrl: BAIDU_ASSOCAITION_URL,
+			sugUrl: currentSearchEngine,
 			sugContent: value
 		}
-		if(value){
+		if (value) {
 			window.getAssociation(config);
 		}
-		
+	}
+
+	const getCurrentEngine = (engineUrl) => {
+		currentSearchEngine = engineUrl;
 	}
 </script>
 
@@ -38,6 +50,7 @@
 		background-size: cover;
 		background-position: center;
 		background-image: url('../assets/background.jpg');
+
 		.search-panel {
 			position: absolute;
 			left: 540px;
