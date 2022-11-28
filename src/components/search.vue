@@ -8,12 +8,12 @@
 		</div>
 
 		<div class="cm-input-main">
-			<input @blur="changePosition" v-model="inputValue" @input="checkInputValue" autofocus
+			<input @blur="changePosition" @keydown.down="selectedNext" @keydown.up="selectedUp" v-model="inputValue" @input="checkInputValue" autofocus
 				:class="['cm-input-instance',textPosition]" placeholder="相信美好的事情将会发生" />
 		</div>
 
-		<div v-if="inputValue" @keydown.up="optionUp" @keydown.down="optionDown" class="association-list">
-			<List :content='associationContent'></List>
+		<div v-if="inputValue"  class="association-list">
+			<List @selectedInputValue = 'changeInputValueBySelected'  :seleted='currentListIndex' :content='associationContent'></List>
 		</div>
 	</div>
 
@@ -44,7 +44,24 @@
 		BING_ASSOCAITION_URL,
 		BAIDU_ASSOCAITION_URL
 	} from '@/constant/sugConstant.js'
-
+	
+	/**
+	 * description: 监听组件选择联想词
+	 * author: baozi
+	 * @createTime: 2022-11-28 12:05:54
+	 */
+	const changeInputValueBySelected = (value) => {
+		inputValue.value = value;
+	}
+	//默认选中的List为没有
+	let currentListIndex = ref(-1);
+	const selectedNext = () => {
+		currentListIndex.value++;
+	}
+	const selectedUp = () => {
+		currentListIndex.value--;
+	}
+	
 	// 给父组件传递inputValue和搜索引擎名称 来生成联想词
 	let inputValue = ref();
 	const emit = defineEmits();
@@ -72,12 +89,12 @@
 		sug: (res) => {
 			let resArray = [];
 			let handledArray = [];
-			for(let index in res[1]){
+			for (let index in res[1]) {
 				resArray.push(res[1][index][0]);
 			}
 			// 处理返回的个数
-			if(resArray.length>8){
-				for(let index =0;index<8;index++){
+			if (resArray.length > 8) {
+				for (let index = 0; index < 8; index++) {
 					handledArray.push(resArray[index]);
 				}
 			}
@@ -94,8 +111,8 @@
 		sug: (res) => {
 			let resArray = [];
 			let unhandleArray = res.AS.Results;
-			for(let index in unhandleArray){
-				for(let tindex in unhandleArray[index].Suggests){
+			for (let index in unhandleArray) {
+				for (let tindex in unhandleArray[index].Suggests) {
 					resArray.push(unhandleArray[index].Suggests[tindex].Txt);
 				}
 			}
@@ -177,14 +194,14 @@
 			textPosition.value = 'center';
 		}
 	};
-
+	
 	/**
-	 * description: 按下上箭头时间，选择联想词输入框
+	 * description: 阻止输入框上下的默认行为
 	 * author: baozi
-	 * @createTime: 2022-11-23 10:47:44
+	 * @createTime: 2022-11-27 22:12:34
 	 */
-	const optionUp = () => {
-		console.log('up!');
+	const preventDownAndUp = () => {
+		console.log('PreventIng');
 	}
 </script>
 
@@ -204,15 +221,10 @@
 		flex-wrap: wrap;
 		background-color: #fff;
 		border-radius: 5px;
-
-		.association-list {
-			width: calc(27.5vw);
-		}
-
+		align-items: center;
 		.cm-icon-panel {
 			margin: 0 10px;
 			padding: 8px;
-
 			span {
 				font-size: 30px;
 			}
@@ -220,12 +232,12 @@
 
 		.cm-input-main {
 			padding-left: 3px;
-
+			width: calc(30vw - 69px);
 			.cm-input-instance {
 				border-style: none;
-				width: calc(27.5vw);
+				width: 100%;
 				font-size: 18px;
-				line-height: 45px;
+				line-height: 100%;
 			}
 		}
 
