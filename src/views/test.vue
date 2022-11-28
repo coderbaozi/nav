@@ -1,14 +1,14 @@
 <template>
-	<div class="test-panel">
-		<search></search>
-	</div>
+	<span class="iconfont icon-search"></span>
+<!-- 	<List :content='content'></List> -->
 </template>
 
-<script>
+
+<script setup>
+import { reactive } from 'vue';
+	let content = reactive(['我测你的','你是谁啊']);
 </script>
 
 <style lang="less">
-	.test-panel{
-		background-color: #000;
-	}
+
 </style>

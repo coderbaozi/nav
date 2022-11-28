@@ -27,6 +27,13 @@
 	} = getCurrentInstance();
 	let fontColor = ref('white');
 	let currentSearchEngine = GOOGLE_ASSOCAITION_URL;
+	
+	/**
+	 * description: 获取输入框内容，并发送jsonp内容
+	 * TODO 节流实现
+	 * author: baozi
+	 * @createTime: 2022-11-27 22:01:54
+	 */
 	const getInputValue = (value) => {
 		const config = {
 			sugUrl: currentSearchEngine,
@@ -36,7 +43,12 @@
 			window.getAssociation(config);
 		}
 	}
-
+	
+	/**
+	 * description: 根据icon获取当前选中的搜索引擎
+	 * author: baozi
+	 * @createTime: 2022-11-27 22:02:43
+	 */
 	const getCurrentEngine = (engineUrl) => {
 		currentSearchEngine = engineUrl;
 	}
@@ -55,7 +67,7 @@
 			position: absolute;
 			left: 540px;
 			top: 350px;
-			width: calc(34.15vw);
+			width: calc(30vw);
 		}
 
 		.clock-panel {
