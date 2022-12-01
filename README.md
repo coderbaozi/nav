@@ -32,6 +32,20 @@ Install my-project with npm
 
 For support, email 3302304715@qq.com .
 
+## Instructions
+
+This project use vite-svg-loader,which is used to import many icons from UIDesign.
+```
+The Tool will import icon as component in vue,then you can use it in vue file.
+
+forexample:
+html
+<icon-search :class="['cm-list-icon']"></icon-search>
+
+js
+ import iconSearch from '@/assets/icon/svg/Search.svg'
+ 
+```
 
 ## About Me
 
