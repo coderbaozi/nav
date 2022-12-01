@@ -64,10 +64,10 @@
 		background-image: url('../assets/background.jpg');
 
 		.search-panel {
-			position: absolute;
-			left: 540px;
 			top: 350px;
+			left: 540px;
 			width: calc(30vw);
+			position: absolute;
 		}
 
 		.clock-panel {

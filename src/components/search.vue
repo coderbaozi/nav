@@ -217,14 +217,14 @@
 
 	.cm-search-panel {
 		display: flex;
-		flex-direction: row;
 		flex-wrap: wrap;
-		background-color: #fff;
 		border-radius: 5px;
 		align-items: center;
+		flex-direction: row;
+		background-color: #fff;
 		.cm-icon-panel {
-			margin: 0 10px;
 			padding: 8px;
+			margin: 0 10px;
 			span {
 				font-size: 30px;
 			}
@@ -234,10 +234,10 @@
 			padding-left: 3px;
 			width: calc(30vw - 69px);
 			.cm-input-instance {
-				border-style: none;
 				width: 100%;
 				font-size: 18px;
 				line-height: 100%;
+				border-style: none;
 			}
 		}
 
