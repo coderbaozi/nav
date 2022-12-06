@@ -5,14 +5,14 @@
  */
 
 const beanFactory = {
-	/**
-	 * description: 返回一个Date对象实例
-	 * author: baozi
-	 * @return Object Date
-	 * @createTime: 2022-11-13 13:56:32
-	 */
-	getDateBean: ()=>{
-		return new Date();
-	}
+  /**
+   * description: 返回一个Date对象实例
+   * author: baozi
+   * @return Object Date
+   * @createTime: 2022-11-13 13:56:32
+   */
+  getDateBean: () => {
+    return new Date()
+  },
 }
-export default beanFactory;
+export default beanFactory
