@@ -1,22 +1,53 @@
 <template>
-  <div>
-    num1: <input v-model.number = "num1" style="width:100px" />
-    <br/>
-    num2: <input v-model.number = "num2" style="width:100px"/>
-    加法结果：{{addNum}}
+  <!-- <div>
+    <TabBar show-mode="logo">
+      <template #Showlogo>
+        <icon-logo class="icon-test"></icon-logo>
+        <span>Direction</span>
+      </template>
+      <TabBarItem>
+        <template #tabbarIcon> </template>
+        <template #tabbarContent>
+          <div>搜索</div>
+        </template>
+      </TabBarItem>
+      <TabBarItem path="/translate">
+        <template #tabbarContent>
+          <div>翻译</div>
+        </template>
+      </TabBarItem>
+      <TabBarItem>
+        <template #tabbarContent>
+          <Switch></Switch>
+        </template>
+      </TabBarItem>
+    </TabBar>
+  </div> -->
+  <div  class="test-main">
+    <Radio> </Radio>
   </div>
+  <p>ceshi</p>
 </template>
 
 <script setup>
-// 测试自定义hooks
-import { ref } from 'vue';
-import useAdd from '../hooks/useAdd'
-const num1 = ref(1)
-const num2 = ref(2)
-// 加法功能- 自定义hook （将响应式变量或者方法暴露出来）
-const {addNum, addFn} = useAdd({num1,num2})
-addFn(num1.value,num2.value)
-
+import TabBar from '../components/common/tabbar/TabBar.vue'
+import TabBarItem from '../components/common/tabbar/TabBarItem.vue'
+import iconLogo from '@/assets/icon/svg/Logo.svg'
+import Radio from '@/components/common/Radio/Radio.vue'
+import iconLight from '@/assets/icon/svg/Sun.svg'
+import iconDark from '@/assets/icon/svg/Moon.svg'
 </script>
 
-<style lang="less"></style>
+<style lang="less">
+.icon-test {
+  vertical-align: -0.15em;
+}
+.test-main {
+  position: absolute;
+  top: 30px;
+  left: 60px;
+}
+p{
+  color: var(--fontColor);
+}
+</style>

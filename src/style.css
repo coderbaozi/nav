@@ -101,3 +101,32 @@ hr {
   border: none;
   height: 1px;
 }
+:root[color-mode='light'] {
+  --text-color-default: #000;
+  --text-color: #fff;
+  --bg-grey-1: #f7f9fb;
+  --bg-grey-2: #fbfcfd;
+  --bg-grey-3: #d8d8d8;
+  --bg-grey-4: #cacaca;
+
+  --bg-white-1: #eeeeee;
+  --bg-white-2: #f6f6f6;
+  --bg-white-3: #fff;
+
+  --active-blue: #2151e7;
+}
+:root[color-mode='dark'] {
+  --text-color-default: #EBEBEB;
+  --text-color: #8F8F8F;
+
+  --bg-grey-1: #1A1A1A;
+  --bg-grey-2: #979798;
+  --bg-grey-3: #1A1A1A;
+  --bg-grey-4: #797979;
+
+  --bg-white-1: #8f8f8f;
+  --bg-white-2: #949494;
+  --bg-white-3: #999999;
+
+  --active-blue: #2151e7;
+}
