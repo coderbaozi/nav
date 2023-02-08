@@ -96,7 +96,6 @@ const getCoordinate = (e) => {
   .tabbar-panel {
     position: absolute;
     top: 308px;
-    left: calc(39vw);
   }
 }
 </style>

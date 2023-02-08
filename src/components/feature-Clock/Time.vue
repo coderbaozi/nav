@@ -2,10 +2,10 @@
   <div>
     <div class="cm-time-penal" :fontColor="fontColor">
       <div class="cm-time-date">
-        {{ solarDate.month }}月{{ solarDate.day }}日{{ week }} - {{ lunarDate.lunarYear }}{{ lunarDate.standardMonth
+        {{ solarDate.month }}月{{ solarDate.day }}日{{ week }}   {{ lunarDate.lunarYear }}{{ lunarDate.standardMonth
         }}{{ lunarDate.standardDay }}
       </div>
-      <div class="cm-clock">{{ currentTime.hours }} : {{ currentTime.minutes }}</div>
+      <div class="cm-clock">{{ currentTime.hours }} <span>:</span> {{ currentTime.minutes }}</div>
     </div>
   </div>
 </template>
@@ -42,15 +42,16 @@ let fontColor = ref(props.fontColor)
 .cm-time-penal {
   border-radius: 20px;
   padding: 20px;
-  background-color: var(--bg-grey-3);
   .cm-time-date {
     font-size: 18px;
     letter-spacing: 0.5px;
     text-align: center;
+    color: #2f2d2d;
   }
   .cm-clock {
-    font-size: 40px;
+    font-size: 50px;
     text-align: center;
+    font-weight: 700;
   }
 }
 </style>

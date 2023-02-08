@@ -58,11 +58,11 @@ class Request {
   }
 
   get(config) {
-    return this.request({ ...config, methods: 'GET' })
+    return this.request({ ...config, method: 'GET' })
   }
 
   post(config) {
-    return this.request({ ...config, methods: 'POST' })
+    return this.request({ ...config, method: 'POST' })
   }
 }
 

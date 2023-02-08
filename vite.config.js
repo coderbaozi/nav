@@ -18,8 +18,8 @@ export default defineConfig({
     // 是否开启 https
     https: false,
     // proxy: {
-    //   '/api': {
-    //     target: 'http://localhost:8080/',
+    //   '/trans': {
+    //     target: 'https://aidemo.youdao.com',
     //     changeOrigin: true,
     //     rewrite: (path) => path.replace(/^\/api/, ''),
     //   },

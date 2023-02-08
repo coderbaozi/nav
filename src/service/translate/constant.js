@@ -1,0 +1,1 @@
+export const YOUDAO_TRANSLATE_URL = 'https://aidemo.youdao.com'
