@@ -1,18 +1,18 @@
 <template>
-  <div :class="fontColor">
+  <div>
     <div class="cm-time-penal" :fontColor="fontColor">
       <div class="cm-time-date">
-        {{ solarDate.month }}月{{ solarDate.day }}日{{ week }} . {{ lunarDate.lunarYear }}{{ lunarDate.standardMonth
+        {{ solarDate.month }}月{{ solarDate.day }}日{{ week }}   {{ lunarDate.lunarYear }}{{ lunarDate.standardMonth
         }}{{ lunarDate.standardDay }}
       </div>
-      <div class="cm-clock">{{ currentTime.hours }} : {{ currentTime.minutes }}</div>
+      <div class="cm-clock">{{ currentTime.hours }} <span>:</span> {{ currentTime.minutes }}</div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import DateUtils from '../utils/Date.js'
+import DateUtils from '../../utils/Date.js'
 let solarDate = ref()
 let lunarDate = ref()
 solarDate.value = DateUtils.getStandardDate()
@@ -38,35 +38,21 @@ let fontColor = ref(props.fontColor)
 </script>
 
 <style lang="less" scoped>
-// 黑白两色
-.white {
-  color: #fff;
-  .cm-clock {
-    border: solid #dcdcdc 4px;
-  }
-}
-
-.black {
-  color: #000;
-  .cm-clock {
-    border: solid #000 4px;
-  }
-}
 
 .cm-time-penal {
-  width: 320px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  border-radius: 20px;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0);
   .cm-time-date {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 0.5px;
     text-align: center;
-    margin-bottom: 20px;
+    color: #2f2d2d;
   }
   .cm-clock {
-    font-size: 80px;
+    font-size: 50px;
     text-align: center;
-    border-radius: 10px;
+    font-weight: 700;
   }
 }
 </style>

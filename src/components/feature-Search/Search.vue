@@ -13,6 +13,7 @@
         @keydown.down="selectedNext"
         @keydown.up="selectedUp"
         v-model="inputValue"
+        @keydown.enter="toSearch"
         @input="checkInputValue"
         autofocus
         :class="['cm-input-instance', textPosition]"
@@ -21,9 +22,9 @@
 
     <div v-if="inputValue" class="association-list">
       <List
+        have-border
         ref="mylist"
         @selectedInputValue="changeInputValueBySelected"
-        :currentSelectedIndex="currentListIndex"
         :content="associationContent"></List>
     </div>
   </div>
@@ -45,6 +46,7 @@ window.getAssociation = (config) => {
 <script setup>
 import { ref } from 'vue'
 import { GOOGLE_ASSOCAITION_URL, BING_ASSOCAITION_URL, BAIDU_ASSOCAITION_URL } from '@/constant/sugConstant.js'
+import SEARCH_API from '../../constant/searchUrl'
 const emit = defineEmits()
 
 //拿到list组件暴露出来的值
@@ -59,6 +61,8 @@ let associationContent = ref()
 //默认选中的List为没有
 let currentListIndex = ref(-1)
 
+// 当前搜索引擎Url
+let currentEngineUrl = GOOGLE_ASSOCAITION_URL
 // 切换icon图标常量
 const ICON_NAME = {
   google: 'icon-guge',
@@ -71,6 +75,22 @@ let currentIcon = ref(ICON_NAME.google)
 
 // input placeholder 占位符位置
 let textPosition = ref('center')
+
+const toSearch = () => {
+  if (inputValue) {
+    switch (currentIcon.value) {
+      case ICON_NAME.google:
+        window.location.href = SEARCH_API.GOOGLE_URL + inputValue.value
+        break
+      case ICON_NAME.baidu:
+        window.location.href = SEARCH_API.BAIDU_URL + inputValue.value
+        break
+      case ICON_NAME.bing:
+        window.location.href = SEARCH_API.BING_URL + inputValue.value
+        break
+    }
+  }
+}
 
 /**
  * description: 监听子组件选择联想词 , 并同步当前联想词index
@@ -90,12 +110,14 @@ const changeInputValueBySelected = (config) => {
  */
 const selectedNext = () => {
   // 当小于联想词长度时改变
-  if (currentListIndex.value < associationContent.value.length - 1  ) {
+  if (currentListIndex.value < associationContent.value.length - 1) {
     // 选中把 index传递给子组件
     currentListIndex.value++
     mylist.value.selectedIndex = currentListIndex.value
+    inputValue.value = associationContent.value[currentListIndex.value]
   }
 }
+
 /*
  * @Description: 键盘上移选择联想词
  * @Author: baozi
@@ -106,6 +128,7 @@ const selectedUp = () => {
   if (currentListIndex.value > 0) {
     currentListIndex.value--
     mylist.value.selectedIndex = currentListIndex.value
+    inputValue.value = associationContent.value[currentListIndex.value]
   }
 }
 
@@ -168,18 +191,21 @@ window.bing = {
  * TODO 待优化
  */
 const pressTab = () => {
-  // 切换搜索引擎清空联想词
+  // 切换搜索引擎清空联想词，并且将联想词的index复原
   associationContent.value = []
+  if (inputValue.value) {
+    currentListIndex.value = -1
+    mylist.value.selectedIndex = currentListIndex.value
+  }
   if (currentIcon.value == ICON_NAME.google) {
     currentIcon.value = ICON_NAME.baidu
-    //将当前搜索引擎抛出
-    emit('currentSearchEngineFunc', BAIDU_ASSOCAITION_URL)
+    currentEngineUrl = BAIDU_ASSOCAITION_URL
   } else if (currentIcon.value == ICON_NAME.baidu) {
     currentIcon.value = ICON_NAME.bing
-    emit('currentSearchEngineFunc', BING_ASSOCAITION_URL)
+    currentEngineUrl = BING_ASSOCAITION_URL
   } else {
     currentIcon.value = ICON_NAME.google
-    emit('currentSearchEngineFunc', GOOGLE_ASSOCAITION_URL)
+    currentEngineUrl = GOOGLE_ASSOCAITION_URL
   }
 }
 
@@ -203,15 +229,21 @@ document.onkeydown = (event) => {
 }
 
 /**
- * description: 检查是否input框中是否有输入
+ * description: 检查是否input框中是否有输入，发送jsonp请求
  * author: baozi
  */
 const checkInputValue = (event) => {
   if (event) {
     textPosition.value = 'left'
   }
-  // 将数据传给父组件 ，由父组件发请求
-  emit('getInputValue', inputValue.value)
+  //发送jsonp请求,并清空内容
+  const config = {
+    sugUrl: currentEngineUrl,
+    sugContent: inputValue.value,
+  }
+  if (inputValue.value) {
+    window.getAssociation(config)
+  }
 }
 
 /**
@@ -224,7 +256,7 @@ const changePosition = () => {
   }
 }
 
-/**
+/**TODO
  * description: 阻止输入框上下的默认行为
  * author: baozi
  * @createTime: 2022-11-27 22:12:34
@@ -246,14 +278,16 @@ const preventDownAndUp = () => {
 
 .cm-search-panel {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   border-radius: 5px;
+  width: 40vw;
   align-items: center;
-  flex-direction: row;
-  background-color: #fff;
+
   .cm-icon-panel {
+    border-top-left-radius: 5px;
     padding: 8px;
-    margin: 0 10px;
+    background-color: var(--bg-grey-3);
     span {
       font-size: 30px;
     }
@@ -261,13 +295,21 @@ const preventDownAndUp = () => {
 
   .cm-input-main {
     padding-left: 3px;
-    width: calc(30vw - 69px);
+    border: 1px solid var(--bg-grey-3);
+    background-color: var(--bg-grey-3);
+
     .cm-input-instance {
-      width: 100%;
+      width: 25vw;
+      height: 44px;
+      padding-left: 8px;
       font-size: 18px;
       line-height: 100%;
       border-style: none;
     }
+  }
+  .association-list {
+    border: 1px solid var(--bg-grey-3) ;
+    border-radius: 0 0 10px 10px;
   }
 }
 

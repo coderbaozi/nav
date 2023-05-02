@@ -1,70 +1,113 @@
 <template>
-  <div class="home-panel">
+  <div @touchmove="getCoordinate" class="home-panel">
+    <!-- topbar -->
+    <div class="topbar-panel">
+      <TabBar show-mode="logo">
+        <template #Showlogo>
+          <icon-logo class="icon-logo"></icon-logo>
+          <span class="nav">nav</span>
+        </template>
+        <TabBarItem>
+          <template #tabbarContent>
+            <Radio></Radio>
+          </template>
+        </TabBarItem>
+      </TabBar>
+    </div>
+    <!-- clock -->
     <div class="clock-panel">
       <Time :fontColor="fontColor"></Time>
     </div>
 
+    <!-- search -->
     <div class="search-panel">
-      <search @currentSearchEngineFunc="getCurrentEngine" class="search-main" @getInputValue="getInputValue"></search>
+          <!-- tabbar -->
+    <div class="tabbar-panel">
+      <TabBar>
+        <TabBarItem active-default path="/home/search">
+          <template #tabbarContent>
+            <div>搜索</div>
+          </template>
+        </TabBarItem>
+        <TabBarItem path="/home/translate">
+          <template #tabbarContent>
+            <div>翻译</div>
+          </template>
+        </TabBarItem>
+      </TabBar>
+    </div>
+      <router-view></router-view>
+      <div class="panel">
+        <Panel />
+      </div>
+    </div>
+    <div class="footer">
+      <Footer></Footer>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, getCurrentInstance } from 'vue'
-import { GOOGLE_ASSOCAITION_URL } from '@/constant/sugConstant.js'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
+import iconLogo from '@/assets/icon/svg/Logo.svg'
+import TabBar from '../components/common/tabbar/TabBar.vue'
+import TabBarItem from '../components/common/tabbar/TabBarItem.vue'
+import Time from '../components/feature-Clock/Time.vue'
+import Radio from '../components/common/Radio/Radio.vue'
+import Panel from "@/components/Panel/panel.vue";
+import Footer from "@/components/common/TheFooter.vue";
+
 // 改变时间组件颜色
 let fontColor = ref('white')
-// 默认当前引擎为 google
-let currentSearchEngine = GOOGLE_ASSOCAITION_URL
 
-/**
- * description: 获取输入框内容，并发送jsonp内容
- * TODO 节流实现
- * author: baozi
- * @createTime: 2022-11-27 22:01:54
- */
-const getInputValue = (value) => {
-  const config = {
-    sugUrl: currentSearchEngine,
-    sugContent: value,
-  }
-  if (value) {
-    window.getAssociation(config)
-  }
-}
-
-/**
- * description: 根据icon获取当前选中的搜索引擎
- * author: baozi
- * @createTime: 2022-11-27 22:02:43
- */
-const getCurrentEngine = (engineUrl) => {
-  currentSearchEngine = engineUrl
+const getCoordinate = (e) => {
+  console.log('test')
+  console.log(e)
 }
 </script>
 
 <style lang="less">
+.nav {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;;
+}
 .home-panel {
   // 实现响应式
   width: 100%;
-  height: calc(100vh);
-  background-size: cover;
-  background-position: center;
-  background-image: url('../assets/background.jpg');
-
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: relative;
+  align-items: center;
+  height: 100vh;
+  z-index: 0;
+  background-color: var(--bg-grey-1);
+  .topbar-panel {
+    width: 100%;
+    .icon-logo {
+      width: 36px;
+      height: 32px;
+    }
+    :hover {
+      display: flex;
+    }
+  }
   .search-panel {
-    top: 350px;
-    left: 540px;
-    width: calc(30vw);
-    position: absolute;
+    display: flex;
+    flex-direction: row;
+    width: 30vw;
+    flex-wrap: wrap;
+    .tabbar-panel {
+      padding: 6px;
+    }
   }
-
-  .clock-panel {
-    top: 80px;
-    left: 635px;
-    position: absolute;
-  }
+}
+.panel {
+  position: absolute;
+  z-index: -1;
+  top: 260px;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
 }
 </style>
