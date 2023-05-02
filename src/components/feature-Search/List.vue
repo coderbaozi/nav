@@ -76,7 +76,7 @@ listComInit()
 .t-list-item {
   cursor: pointer;
   padding-left: 15px;
-  width: calc(25vw + 10px);
+  width: calc(27vw - 3.5px) ;
 }
 .cm-list-border {
   border-radius: 0px 0px 10px 10px;

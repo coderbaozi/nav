@@ -40,6 +40,7 @@ let fontColor = ref(props.fontColor)
 <style lang="less" scoped>
 
 .cm-time-penal {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   border-radius: 20px;
   padding: 20px;
   .cm-time-date {

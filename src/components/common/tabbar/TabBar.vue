@@ -36,7 +36,6 @@ let mode = ref(props.showMode)
 }
 .cm-tabbar {
   display: var(--display);
-  border-bottom: var(--border-bottom);
   align-items: center;
   .cm-logo-placeholder {
     display: flex;

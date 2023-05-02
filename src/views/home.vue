@@ -5,21 +5,11 @@
       <TabBar show-mode="logo">
         <template #Showlogo>
           <icon-logo class="icon-logo"></icon-logo>
-          <span>Direction</span>
+          <span class="nav">nav</span>
         </template>
         <TabBarItem>
           <template #tabbarContent>
             <Radio></Radio>
-          </template>
-        </TabBarItem>
-        <TabBarItem path="">
-          <template #tabbarContent>
-            <div>contact</div>
-          </template>
-        </TabBarItem>
-        <TabBarItem path="">
-          <template #tabbarContent>
-            <div>关于我们</div>
           </template>
         </TabBarItem>
       </TabBar>
@@ -28,7 +18,10 @@
     <div class="clock-panel">
       <Time :fontColor="fontColor"></Time>
     </div>
-    <!-- tabbar -->
+
+    <!-- search -->
+    <div class="search-panel">
+          <!-- tabbar -->
     <div class="tabbar-panel">
       <TabBar>
         <TabBarItem active-default path="/home/search">
@@ -43,8 +36,6 @@
         </TabBarItem>
       </TabBar>
     </div>
-    <!-- search -->
-    <div class="search-panel">
       <router-view></router-view>
     </div>
   </div>
@@ -67,13 +58,18 @@ const getCoordinate = (e) => {
 </script>
 
 <style lang="less">
+.nav {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;;
+}
 .home-panel {
   // 实现响应式
   width: 100%;
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   position: relative;
+  align-items: center;
   height: 100vh;
-  justify-content: center;
   background-color: var(--bg-grey-1);
   .topbar-panel {
     width: 100%;
@@ -86,16 +82,13 @@ const getCoordinate = (e) => {
     }
   }
   .search-panel {
-    position: absolute;
-    top: 340px;
-  }
-  .clock-panel {
-    position: absolute;
-    top: 150px;
-  }
-  .tabbar-panel {
-    position: absolute;
-    top: 308px;
+    display: flex;
+    flex-direction: row;
+    width: 30vw;
+    flex-wrap: wrap;
+    .tabbar-panel {
+      padding: 6px;
+    }
   }
 }
 </style>

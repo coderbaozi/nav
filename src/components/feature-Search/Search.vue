@@ -278,11 +278,11 @@ const preventDownAndUp = () => {
 
 .cm-search-panel {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   border-radius: 5px;
-  width: calc(25vw + 59px);
+  width: 40vw;
   align-items: center;
-  flex-direction: row;
 
   .cm-icon-panel {
     border-top-left-radius: 5px;
@@ -295,11 +295,11 @@ const preventDownAndUp = () => {
 
   .cm-input-main {
     padding-left: 3px;
-    width: 25vw;
     border: 1px solid var(--bg-grey-3);
     background-color: var(--bg-grey-3);
+
     .cm-input-instance {
-      width: 98%;
+      width: 25vw;
       height: 44px;
       padding-left: 8px;
       font-size: 18px;
