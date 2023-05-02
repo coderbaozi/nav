@@ -83,6 +83,7 @@ listComInit()
 }
 .cm-list-panel {
   display: flex;
+  z-index: 9999;
   .cm-list-icon {
     width: 18px;
     height: 18px;

@@ -50,7 +50,7 @@ import translateIcon from '@/assets/icon/svg/Translate.svg'
   background-color: #fff;
   .cm-translate-topbar {
     display: flex;
-    padding: 8px 8px 8px 40px;
+    padding: 8px 8px 8px 10px;
     align-items: center;
     border-bottom: 1px solid #d8d8d8;
   }
@@ -91,7 +91,7 @@ import translateIcon from '@/assets/icon/svg/Translate.svg'
       }
       .cm-label {
         color: #d8d8d8;
-        font-size: 26px;
+        font-size: 18px;
         width: 100%;
         position: absolute;
         top: 30%;

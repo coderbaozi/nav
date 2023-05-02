@@ -37,6 +37,12 @@
       </TabBar>
     </div>
       <router-view></router-view>
+      <div class="panel">
+        <Panel />
+      </div>
+    </div>
+    <div class="footer">
+      <Footer></Footer>
     </div>
   </div>
 </template>
@@ -48,6 +54,9 @@ import TabBar from '../components/common/tabbar/TabBar.vue'
 import TabBarItem from '../components/common/tabbar/TabBarItem.vue'
 import Time from '../components/feature-Clock/Time.vue'
 import Radio from '../components/common/Radio/Radio.vue'
+import Panel from "@/components/Panel/panel.vue";
+import Footer from "@/components/common/TheFooter.vue";
+
 // 改变时间组件颜色
 let fontColor = ref('white')
 
@@ -70,6 +79,7 @@ const getCoordinate = (e) => {
   position: relative;
   align-items: center;
   height: 100vh;
+  z-index: 0;
   background-color: var(--bg-grey-1);
   .topbar-panel {
     width: 100%;
@@ -90,5 +100,14 @@ const getCoordinate = (e) => {
       padding: 6px;
     }
   }
+}
+.panel {
+  position: absolute;
+  z-index: -1;
+  top: 260px;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
 }
 </style>
