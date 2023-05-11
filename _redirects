@@ -1,1 +1,3 @@
-/search/* http://www.goole.com/search?q= 200!
+/home/search http://www.goole.com/search?q= 200!
+/home/search http://www.baidu.com/s?wd= 200!
+/home/search https://cn.bing.com/search?q= 200!
